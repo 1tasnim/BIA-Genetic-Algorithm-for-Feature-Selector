@@ -91,7 +91,6 @@ def fitness_of(chrom, df, feature_cols, y, model_name="logistic", random_state=4
         y_pred = model.predict(X_test_sc)
         return float(accuracy_score(y_test, y_pred))
     except Exception:
-        # fallback دون تقييس إذا لزم
         try:
             X_train, X_test, y_train, y_test = train_test_split(
                 X_enc, y_enc, test_size=0.3, random_state=random_state,
@@ -145,8 +144,8 @@ def mutate(chrom, mut_rate=0.02, rng=None):
 def genetic_feature_selection(
     df, target_col, pop_size=20, generations=25,
     cx_rate=0.9, mut_rate=0.02, elitism=2, random_state=42,
-    selection_method="roulette",  # "roulette" أو "tournament"
-    model_name="logistic"         # نموذج الملاءمة داخل GA
+    selection_method="roulette",
+    model_name="logistic"         
 ):
     rng = random.Random(random_state)
     y = df[target_col]
@@ -246,7 +245,7 @@ def chi2_feature_selection(df, target_col, k=10):
     # مقياس القيم بين 0 و 1 لأن chi2 يحتاج قيم موجبة
     X_scaled = MinMaxScaler().fit_transform(X)
 
-    # تطبيق اختبار Chi2
+    # Chi2
     chi2_selector = SelectKBest(score_func=chi2, k=min(k, X.shape[1]))
     chi2_selector.fit(X_scaled, y)
     scores = chi2_selector.scores_
