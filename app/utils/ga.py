@@ -18,10 +18,8 @@ from sklearn.linear_model import LogisticRegression, Lasso
 
 from .data import impute_missing, encode_features, split_scale
 
+# ====================   الخوارزمية الجينية GA =====================
 
-# ===================== Value Encoding: تمثيل الكروموسوم كقائمة قيم =====================
-
-# Value Encoding (بتات 0/1)
 def init_population(n_individuals, n_features, rng=None):
     rng = rng or random
     pop = []
@@ -139,7 +137,7 @@ def mutate(chrom, mut_rate=0.02, rng=None):
 def genetic_feature_selection(
     df, target_col, pop_size=20, generations=25,
     cx_rate=0.9, mut_rate=0.02, elitism=2, random_state=42,
-    selection_method="roulette",
+    selection_method="roulette",  
     model_name="logistic"         
 ):
     rng = random.Random(random_state)
