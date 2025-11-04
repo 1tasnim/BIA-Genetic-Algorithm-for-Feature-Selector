@@ -18,9 +18,8 @@ from sklearn.linear_model import LogisticRegression, Lasso
 
 from .data import impute_missing, encode_features, split_scale
 
-# ===================== Value Encoding: تمثيل الكروموسوم كقائمة قيم =====================
+# ====================   الخوارزمية الجينية GA =====================
 
-# Value Encoding (بتات 0/1)
 def init_population(n_individuals, n_features, rng=None):
     rng = rng or random
     pop = []
@@ -85,7 +84,6 @@ def fitness_of(chrom, df, feature_cols, y, model_name="logistic", random_state=4
         y_pred = model.predict(X_test_sc)
         return float(accuracy_score(y_test, y_pred))
     except Exception:
-        # fallback دون تقييس إذا لزم
         try:
             X_train, X_test, y_train, y_test = train_test_split(
                 X_enc, y_enc, test_size=0.3, random_state=random_state,
@@ -139,8 +137,8 @@ def mutate(chrom, mut_rate=0.02, rng=None):
 def genetic_feature_selection(
     df, target_col, pop_size=20, generations=25,
     cx_rate=0.9, mut_rate=0.02, elitism=2, random_state=42,
-    selection_method="roulette",  # "roulette" أو "tournament"
-    model_name="logistic"         # نموذج الملاءمة داخل GA
+    selection_method="roulette",  
+    model_name="logistic"         
 ):
     rng = random.Random(random_state)
     y = df[target_col]
