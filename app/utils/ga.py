@@ -6,23 +6,17 @@ import matplotlib.pyplot as plt
 import random
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import MinMaxScaler
 from sklearn.feature_selection import chi2, SelectKBest
-from sklearn.linear_model import LogisticRegression
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression, Lasso
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
-from sklearn.feature_selection import chi2, SelectKBest
 
 
 from .data import impute_missing, encode_features, split_scale
-import pandas as pd
 
 # ===================== Value Encoding: تمثيل الكروموسوم كقائمة قيم =====================
 
